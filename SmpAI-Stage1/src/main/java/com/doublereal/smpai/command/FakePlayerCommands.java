@@ -54,7 +54,7 @@ public final class FakePlayerCommands {
             return 0;
         }
         ServerLevel level = source.getLevel();
-        FakePlayerEntity fake = ModEntities.FAKE_PLAYER.get().create(level, EntitySpawnReason.COMMAND)
+        FakePlayerEntity fake = ModEntities.FAKE_PLAYER.get().create(level, EntitySpawnReason.COMMAND);
         if (fake == null) {
             source.sendFailure(Component.literal("Could not create fake player entity."));
             return 0;
@@ -81,7 +81,7 @@ public final class FakePlayerCommands {
         ServerLevel level = source.getLevel();
         int spawned = 0;
         for (int i = 0; i < toSpawn; i++) {
-            FakePlayerEntity fake = ModEntities.FAKE_PLAYER.get().create(level, EntitySpawnReason.COMMAND)
+            FakePlayerEntity fake = ModEntities.FAKE_PLAYER.get().create(level, EntitySpawnReason.COMMAND);
             if (fake == null) continue;
             double angle = (Math.PI * 2.0D * i) / Math.max(1, toSpawn);
             double x = source.getPosition().x + Math.cos(angle) * 2.5D;
