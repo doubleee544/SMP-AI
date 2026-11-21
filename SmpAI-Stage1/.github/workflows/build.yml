@@ -1,0 +1,40 @@
+
+name: Build SMP AI
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main, master ]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up Java 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '9.5.0'
+
+      - name: Build Forge mod
+        working-directory: SmpAI-Stage1
+        run: gradle --no-daemon build
+
+      - name: Upload mod JAR
+        uses: actions/upload-artifact@v4
+        with:
+          name: SMP-AI-Forge-1.21.11
+          path: SmpAI-Stage1/build/libs/*.jar
+          if-no-files-found: error
+          retention-days: 14
